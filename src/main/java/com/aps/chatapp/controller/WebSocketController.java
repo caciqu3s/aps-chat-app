@@ -1,7 +1,7 @@
 package com.aps.chatapp.controller;
 
-import com.aps.chatapp.model.Mensagem;
-import com.aps.chatapp.repository.MensagemRepository;
+import com.aps.chatapp.model.Message;
+import com.aps.chatapp.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -11,12 +11,12 @@ import org.springframework.stereotype.Controller;
 public class WebSocketController {
     
     @Autowired
-    private MensagemRepository mensagemRepository;
-    
-    @MessageMapping("/relatorio")
-    @SendTo("/topic/dashboard")
-    public Mensagem handleRelatorio(Mensagem mensagem) {
-        mensagem = mensagemRepository.save(mensagem);
-        return mensagem;
+    private MessageRepository messageRepository;
+
+    @MessageMapping("/chat")
+    @SendTo("/topic/messages")
+    public Message handleMessage(Message message) {
+        message = messageRepository.save(message);
+        return message;
     }
 }
