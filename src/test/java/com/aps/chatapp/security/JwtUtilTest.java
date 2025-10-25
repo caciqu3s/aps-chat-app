@@ -15,10 +15,13 @@ class JwtUtilTest {
     
     private JwtUtil jwtUtil;
     
+    // Test secret - NOT for production use
+    private static final String TEST_SECRET = "mySecretKeyForJWTToken123456789012345678901234567890";
+    
     @BeforeEach
     void setUp() {
         jwtUtil = new JwtUtil();
-        ReflectionTestUtils.setField(jwtUtil, "secret", "mySecretKeyForJWTToken123456789012345678901234567890");
+        ReflectionTestUtils.setField(jwtUtil, "secret", TEST_SECRET);
         ReflectionTestUtils.setField(jwtUtil, "expiration", 86400000L);
     }
     

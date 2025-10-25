@@ -23,6 +23,11 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                // CSRF is disabled for stateless JWT authentication
+                // This is acceptable because:
+                // 1. JWT tokens are stored client-side (not in cookies)
+                // 2. The API is stateless with no server-side session
+                // 3. Each request must include a valid JWT token in the Authorization header
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll()
